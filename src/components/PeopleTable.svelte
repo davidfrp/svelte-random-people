@@ -2,17 +2,19 @@
     export let tableData = [];
 </script>
 
-<table>
-    <tr>
-        {#each Object.keys(tableData[0]) as row}
-            <td>{row}</td>
-        {/each}
-    </tr>
-    {#each tableData as rowData}
+{#if tableData.length > 0}
+    <table>
         <tr>
-            {#each Object.values(rowData) as cellData}
-                <td>{cellData}</td>
+            {#each Object.keys(tableData[0]) as row}
+                <th>{row}</th>
             {/each}
         </tr>
-    {/each}
-</table>
+        {#each tableData as rowData}
+            <tr>
+                {#each Object.values(rowData) as cellData}
+                    <td>{cellData}</td>
+                {/each}
+            </tr>
+        {/each}
+    </table>
+{/if}
