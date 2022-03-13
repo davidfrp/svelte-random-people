@@ -1,17 +1,17 @@
 <script>
 	import PeopleTable from './components/PeopleTable.svelte';
+	import peopleService from './services/peopleServices';
+
+	const data = peopleService();
 </script>
 
 <main>
 	<h1>Hi Heather!</h1>
-	<PeopleTable tableData={[
-		{
-			name: 'Heather',
-			age: '24',
-			occupation: 'Student',
-			location: 'Bristol, England'
-		}
-	]} />
+	{#await data.findAllPaged(1, 10)}
+		<p>...waiting</p>
+	{:then people}
+		<PeopleTable tableData={people} />
+	{/await}
 </main>
 
 <style>

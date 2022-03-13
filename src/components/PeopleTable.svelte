@@ -5,8 +5,8 @@
 {#if tableData.length > 0}
     <table>
         <tr>
-            {#each Object.keys(tableData[0]) as row}
-                <th>{row}</th>
+            {#each Object.keys(tableData[0]) as cellData}
+                <th>{cellData}</th>
             {/each}
         </tr>
         {#each tableData as rowData}
