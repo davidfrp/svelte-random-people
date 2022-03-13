@@ -1,6 +1,6 @@
 <script>
 	import PeopleTable from './components/PeopleTable.svelte';
-	import peopleService from './services/peopleServices';
+	import peopleService from './services/peopleService';
 
 	const data = peopleService();
 	

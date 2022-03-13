@@ -13,13 +13,10 @@ function peopleService() {
                 id: i,
                 name: `${firstName} ${lastName}`,
                 username: faker.internet.userName(firstName, lastName),
-                address: faker.address.streetAddress(),
-                city: faker.address.city()
+                email: faker.internet.email(firstName, lastName).toLowerCase()
             });
         }
-        setTimeout(() => {
-            resolve(people);
-        }, 1000);
+        resolve(people);
     });
 
     return {
