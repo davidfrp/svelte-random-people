@@ -1,20 +1,21 @@
 <script>
+    import TableHead from './TableHead.svelte';
+    import TableRow from './TableRow.svelte';
     export let tableData = [];
 </script>
 
 {#if tableData.length > 0}
     <table>
-        <tr>
-            {#each Object.keys(tableData[0]) as cellData}
-                <th>{cellData}</th>
-            {/each}
-        </tr>
+        <TableHead data={tableData} />
         {#each tableData as rowData}
-            <tr>
-                {#each Object.values(rowData) as cellData}
-                    <td>{cellData}</td>
-                {/each}
-            </tr>
+            <TableRow data={rowData} />
         {/each}
     </table>
 {/if}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+</style>
