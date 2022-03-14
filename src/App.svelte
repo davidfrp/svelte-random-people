@@ -1,9 +1,9 @@
 <script>
 	import UserTable from './components/UsersTable.svelte';
 	import LoadingIcon from './components/LoadingIcon.svelte';
-	import userService from './services/userService';
+	import usersService from './services/usersService';
 
-	const service = userService();
+	const service = usersService();
 
 	let page = 1;
 	let perPage = 10;
@@ -16,17 +16,17 @@
 	async function fetchData() {
 		isLoading = true;
 		
-		let data = await service.findAllPaged(page, perPage);
-	
-		data = data.map((user) => ({
+		let users = await service.findAll(page, perPage);
+		
+		users = users.items.map((user) => ({
 			...user,
 			avatar: `<img class="avatar" src="${user.avatar}" alt="" />`
 		}));
 
-		tableData = [...tableData, ...data];
+		tableData = [...tableData, ...users];
 		page++;
 
-		if (data.length < perPage) {
+		if (users.length < perPage) {
 			hasNoMoreData = true;
 		}
 		
