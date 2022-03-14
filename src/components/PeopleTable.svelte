@@ -1,6 +1,6 @@
 <script>
-    import TableHead from './TableHead.svelte';
-    import TableRow from './TableRow.svelte';
+    import TableHead from "./TableHead.svelte";
+    import TableRow from "./TableRow.svelte";
     export let tableData = [];
 </script>
 

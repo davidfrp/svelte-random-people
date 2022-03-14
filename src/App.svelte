@@ -1,34 +1,45 @@
 <script>
 	import PeopleTable from './components/PeopleTable.svelte';
+	import LoadingIcon from './components/LoadingIcon.svelte';
 	import peopleService from './services/peopleService';
 
-	const data = peopleService();
-	
-	let people = [];
-	let currentPage = 1;
-	let hasReachEnd = false;
-	
-	async function handleClick() {
-		const newPeople = await data.findAllPaged(currentPage, 50);
-		if (newPeople.length > 0) {
-			people = [...people, ...newPeople];
-			currentPage++;
-		} else {
-			hasReachEnd = true;
+	const service = peopleService();
+
+	let tableData = [];
+	let page = 1;
+	let perPage = 10;
+
+	let isLoading = false;
+	let hasNoMoreData = false;
+
+	async function fetchData() {
+		isLoading = true;
+		
+		const data = await service.findAllPaged(page, perPage);
+		tableData = [...tableData, ...data];
+		page++;
+
+		if (data.length < perPage) {
+			hasNoMoreData = true;
 		}
+		
+		isLoading = false;
 	}
 
-	handleClick();
+	fetchData();
 </script>
 
 <main>
-	<h1>Random people data</h1>
-	<PeopleTable tableData={people} />
+	<PeopleTable {tableData} />
 	<div id="status">
-		{#if hasReachEnd}
-			<p>No more data to load</p>
+		{#if isLoading}
+			<LoadingIcon />
+		{:else if hasNoMoreData}
+			<p>No more data</p>
 		{:else}
-			<button on:click={handleClick}>Load more</button>
+			<button on:click={fetchData}>
+				Show more
+			</button>
 		{/if}
 	</div>
 </main>
@@ -36,20 +47,12 @@
 <style>
 	#status {
 		text-align: center;
-		margin: 2rem 0;
+		margin: 3.5rem 0;
 	}
 
 	main {
-		padding: 1em;
+		padding: 0 1rem;
 		max-width: 1200px;
 		margin: 0 auto;
-	}
-	
-	h1 {
-		text-align: center;
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
 	}
 </style>

@@ -10,10 +10,14 @@
 
 <style>
     tr:nth-child(even) {
-        background-color: #f2f2f2
+        background-color: #1f2223;
     }
 
     td {
-        padding: 0.5rem;
+        padding: 0.75rem;
+    }
+
+    td:first-child {
+        font-family: 'Consolas', 'Courier New', Courier, monospace;
     }
 </style>
