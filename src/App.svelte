@@ -16,7 +16,13 @@
 	async function fetchData() {
 		isLoading = true;
 		
-		const data = await service.findAllPaged(page, perPage);
+		let data = await service.findAllPaged(page, perPage);
+	
+		data = data.map((user) => ({
+			...user,
+			avatar: `<img class="avatar" src="${user.avatar}" alt="" />`
+		}));
+
 		tableData = [...tableData, ...data];
 		page++;
 
@@ -26,11 +32,6 @@
 		
 		isLoading = false;
 	}
-
-	$: tableData = tableData.map((user) => ({
-		...user, 
-		avatar: `<img src="${user.avatar}" />`
-	}));
 
 	fetchData();
 </script>
