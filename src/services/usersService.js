@@ -15,6 +15,7 @@ function usersService() {
                 name: `${firstName} ${lastName}`,
                 username: faker.internet.userName(firstName, lastName),
                 email: faker.internet.email(firstName, lastName).toLowerCase(),
+                createdAt: faker.date.past().getTime()
             });
         }
 
@@ -23,6 +24,13 @@ function usersService() {
 
     function getPage(page, perPage, items) {
         const totalPages = Math.ceil(items.length / perPage);
+
+        if (page > totalPages) {
+            page = totalPages;
+        } else if (page < 1) {
+            page = 1;
+        }
+
         const start = (page - 1) * perPage;
         const end = start + perPage;
 
@@ -30,7 +38,7 @@ function usersService() {
             page,
             perPage,
             totalCount: items.length,
-            items: items.slice(start, end),
+            items: items.slice(start, end)
         };
     }
 
@@ -42,10 +50,13 @@ function usersService() {
         findAll: async (page = 1, perPage = 100) => {
             return getPage(page, perPage, await usersPromise);
         },
-        findAllByName: (name, page = 1, perPage = 100) => {
+        findAllByName: async (name, page = 1, perPage = 100) => {
             const users = await usersPromise;
             const filteredUsers = users.filter((user) =>
-                user.name.toLowerCase().includes(name.toLowerCase())
+                user.name
+                    .trim()
+                    .toLowerCase()
+                    .includes(name.trim().toLowerCase())
             );
 
             return getPage(page, perPage, filteredUsers);

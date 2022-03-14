@@ -20,15 +20,20 @@ body {
 	font-size: 16px;
 }
 
-button {
+button, select, input, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
 	border: none;
-	background: none;
-	color: #ff3e00;
 	cursor: pointer;
-	font: inherit;
+}
+
+button {
 	font-weight: 100;
 	padding: 0.5rem 1.5rem;
 	border-radius: 0.25rem;
+	color: #ff3e00;
 }
 
 button:hover {
