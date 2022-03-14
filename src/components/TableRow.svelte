@@ -16,8 +16,4 @@
     td {
         padding: 0.75rem;
     }
-
-    td:first-child {
-        font-family: 'Consolas', 'Courier New', Courier, monospace;
-    }
 </style>
