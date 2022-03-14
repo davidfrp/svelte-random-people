@@ -11,6 +11,7 @@ function peopleService() {
 
             people.push({
                 id: i,
+                avatar: faker.image.avatar(),
                 name: `${firstName} ${lastName}`,
                 username: faker.internet.userName(firstName, lastName),
                 email: faker.internet.email(firstName, lastName).toLowerCase()
