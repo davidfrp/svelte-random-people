@@ -1,11 +1,11 @@
 <script>
-    export let data = [];
+    export let columnNames = [];
 </script>
 
 <thead>
     <tr>
-        {#each Object.keys(data[0]) as cellData}
-            <th>{cellData.split(/(?=[A-Z])/).join(' ')}</th>
+        {#each columnNames as columnName}
+            <th>{columnName}</th>
         {/each}
     </tr>
 </thead>

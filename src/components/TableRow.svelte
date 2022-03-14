@@ -1,10 +1,11 @@
 <script>
-    export let data = [];
+    export let rowData = [];
 </script>
 
 <tr>
-    {#each Object.values(data) as cellData}
-        <td>{cellData}</td>
+    {#each rowData as cellData}
+        <!-- Gets sanitized in UsersTable component. -->
+        <td>{@html cellData}</td>
     {/each}
 </tr>
 

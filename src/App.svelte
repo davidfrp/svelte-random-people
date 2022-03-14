@@ -5,13 +5,14 @@
 
 	const service = userService();
 
-	let tableData = [];
 	let page = 1;
 	let perPage = 10;
-
+	
 	let isLoading = false;
 	let hasNoMoreData = false;
-
+	
+	let tableData = [];
+	
 	async function fetchData() {
 		isLoading = true;
 		
@@ -26,11 +27,18 @@
 		isLoading = false;
 	}
 
+	$: tableData = tableData.map((user) => ({
+		...user, 
+		avatar: `<img src="${user.avatar}" />`
+	}));
+
 	fetchData();
 </script>
 
 <main>
-	<UserTable {tableData} />
+	<UserTable 
+		{tableData} 
+		dangerouslyAllowedColumns={['avatar']} />
 	<div id="status">
 		{#if isLoading}
 			<LoadingIcon />
