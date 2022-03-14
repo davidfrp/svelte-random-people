@@ -1,9 +1,9 @@
 <script>
-	import PeopleTable from './components/PeopleTable.svelte';
+	import UserTable from './components/UsersTable.svelte';
 	import LoadingIcon from './components/LoadingIcon.svelte';
-	import peopleService from './services/peopleService';
+	import userService from './services/userService';
 
-	const service = peopleService();
+	const service = userService();
 
 	let tableData = [];
 	let page = 1;
@@ -30,7 +30,7 @@
 </script>
 
 <main>
-	<PeopleTable {tableData} />
+	<UserTable {tableData} />
 	<div id="status">
 		{#if isLoading}
 			<LoadingIcon />

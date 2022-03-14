@@ -2,6 +2,9 @@
     import TableHead from "./TableHead.svelte";
     import TableRow from "./TableRow.svelte";
     export let tableData = [];
+    export let dataMapper = (data) => data;
+
+    $: tableData = tableData.map(dataMapper);
 </script>
 
 {#if tableData.length > 0}

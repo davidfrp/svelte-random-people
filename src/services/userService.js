@@ -16,6 +16,7 @@ function peopleService() {
                 email: faker.internet.email(firstName, lastName).toLowerCase()
             });
         }
+
         resolve(people);
     });
 
