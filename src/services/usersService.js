@@ -14,7 +14,7 @@ function usersService() {
                 avatar: faker.image.avatar(),
                 name: `${firstName} ${lastName}`,
                 username: faker.internet.userName(firstName, lastName),
-                email: faker.internet.email(firstName, lastName).toLowerCase()
+                email: faker.internet.email(firstName, lastName).toLowerCase(),
             });
         }
 
@@ -30,26 +30,26 @@ function usersService() {
             page,
             perPage,
             totalCount: items.length,
-            items: items.slice(start, end)
-        }
+            items: items.slice(start, end),
+        };
     }
 
     return {
         findById: async (id) => {
             const users = await usersPromise;
-            return users.find(user => user.id === id);
+            return users.find((user) => user.id === id);
         },
         findAll: async (page = 1, perPage = 100) => {
             return getPage(page, perPage, await usersPromise);
         },
         findAllByName: (name, page = 1, perPage = 100) => {
             const users = await usersPromise;
-            const filteredUsers = users.filter(user => 
+            const filteredUsers = users.filter((user) =>
                 user.name.toLowerCase().includes(name.toLowerCase())
             );
-            
+
             return getPage(page, perPage, filteredUsers);
-        }
+        },
     };
 }
 
